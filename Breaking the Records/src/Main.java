@@ -44,11 +44,27 @@ class Result {
 
 }
 
-public class Main {
+public class Solution {
     public static void main(String[] args) throws IOException {
-        List<Integer> numbers = Arrays.asList(3, 4, 21, 36, 10, 28, 35, 5, 24, 42);
-        System.out.println(Result.breakingRecords(numbers));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
 
+        List<Integer> scores = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                .map(Integer::parseInt)
+                .collect(toList());
+
+        List<Integer> result = Result.breakingRecords(scores);
+
+        bufferedWriter.write(
+                result.stream()
+                        .map(Object::toString)
+                        .collect(joining(" "))
+                        + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
     }
 }
